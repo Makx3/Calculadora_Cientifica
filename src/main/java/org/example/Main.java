@@ -4,6 +4,10 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        ejecutarMenu();
+    }
+
+    public static void ejecutarMenu(){
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -86,18 +90,27 @@ public class Main {
 
     public static void mostrarMenu() {
         System.out.println("Calculadora");
-        System.out.println("1. Suma");
-        System.out.println("2. Resta");
-        System.out.println("3. Multiplicación");
-        System.out.println("4. División");
-        System.out.println("5. Mayor de 2 números");
-        System.out.println("6. Menor de 2 números");
-        System.out.println("7. Potencia de un número");
-        System.out.println("8. Porcentaje de un número");
-        System.out.println("9. Resolver Ecuación Cuadrática");
-        System.out.println("10. Salir");
+        System.out.println("1. Calcular Solución de Ecuaciones");
+        System.out.println("2. Calcular Ecuación de Recta");
+        System.out.println("3. Sumar");
+        System.out.println("4. Restar");
+        System.out.println("5. Multiplicar");
+        System.out.println("6. Dividir");
+        System.out.println("7. Encontrar el Mayor de 2 Números");
+        System.out.println("8. Encontrar el Menor de 2 Números");
+        System.out.println("9. Calcular Potencia");
+        System.out.println("10. Calcular Porcentaje");
+        System.out.println("11. Resolver Ecuación Cuadrática");
+        System.out.println("12. Calcular Cuadrado");
+        System.out.println("13. Calcular Rectángulo");
+        System.out.println("14. Calcular Círculo");
+        System.out.println("15. Calcular Esfera");
+        System.out.println("16. Calcular Cubo");
+        System.out.println("17. Calcular Cono");
+        System.out.println("18. Salir");
         System.out.print("Seleccione una opción: ");
     }
+
 
     public static void realizarOperacion(String nombreOperacion, Operacion operacion, Scanner scanner) {
         System.out.print("Ingrese el primer número: ");
