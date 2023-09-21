@@ -1,112 +1,9 @@
 package org.example;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
-    public static int obtenerOpcionValidaMenu() {
-        Scanner scanner = new Scanner(System.in);
-        int opcion;
-
-        do {
-            try {
-                opcion = scanner.nextInt();
-                if (opcion >= 1 && opcion <= 3) {
-                    break; // Salir del bucle si se ingresó una opción válida
-                } else {
-                    System.out.println("Opción no válida, intente de nuevo.");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Opción no válida, intente de nuevo.");
-                scanner.nextLine();
-            }
-        } while (true);
-
-        return opcion;
-    }
-
-    public static double[] calcularSolucionEcuaciones() {
-        System.out.println("Para calcular la solución de un sistema de ecuaciones de la forma:");
-        System.out.println("Ax + By = C");
-        System.out.println("Dx + Ey = F");
-
-        double[] valoresSistema = obtenerValoresSistemaEcuaciones();
-
-        return calcularSolucion(valoresSistema[0], valoresSistema[1], valoresSistema[2], valoresSistema[3], valoresSistema[4], valoresSistema[5]);
-    }
-
-    public static double[] calcularEcuacionDeRecta() {
-        System.out.println("Para calcular la ecuación de una recta dada por dos puntos (x1, y1) y (x2, y2).");
-
-        double[] puntosRecta = obtenerPuntosRecta();
-
-        return calcularEcuacionRecta(puntosRecta[0], puntosRecta[1], puntosRecta[2], puntosRecta[3]);
-    }
-
-    public static double[] obtenerValoresSistemaEcuaciones() {
-        double A = obtenerValorValidoMetodos("Ingrese el valor de A: ");
-        double B = obtenerValorValidoMetodos("Ingrese el valor de B: ");
-        double C = obtenerValorValidoMetodos("Ingrese el valor de C: ");
-        double D = obtenerValorValidoMetodos("Ingrese el valor de D: ");
-        double E = obtenerValorValidoMetodos("Ingrese el valor de E: ");
-        double F = obtenerValorValidoMetodos("Ingrese el valor de F: ");
-
-        return new double[]{A, B, C, D, E, F};
-    }
-
-    public static double[] obtenerPuntosRecta() {
-        double x1 = obtenerValorValidoMetodos("Ingrese el valor de x1: ");
-        double y1 = obtenerValorValidoMetodos("Ingrese el valor de y1: ");
-        double x2 = obtenerValorValidoMetodos("Ingrese el valor de x2: ");
-        double y2 = obtenerValorValidoMetodos("Ingrese el valor de y2: ");
-
-        return new double[]{x1, y1, x2, y2};
-    }
-
-    public static double obtenerValorValidoMetodos(String mensaje) {
-        Scanner scanner = new Scanner(System.in);
-        double valor;
-
-        do {
-            try {
-                System.out.print(mensaje);
-                valor = scanner.nextDouble();
-                break; // Sale del bucle si se ingresó un valor válido
-            } catch (InputMismatchException e) {
-                System.out.println("Valor no valido, intente de nuevo.");
-                scanner.nextLine();
-            }
-        } while (true);
-
-        return valor;
-    }
-
-    public static void mostrarResultadoSolucion(double[] resultado) {
-        System.out.println("El resultado del sistema de ecuaciones es:");
-        System.out.println("x = " + resultado[0]);
-        System.out.println("y = " + resultado[1]);
-    }
-
-    public static void mostrarResultadoRecta(double[] ecuacionRecta) {
-        System.out.println("La ecuacion de la recta es:");
-        System.out.println("Y = " + ecuacionRecta[0] + "X + " + ecuacionRecta[1]);
-    }
-
-    public static double[] calcularSolucion(double A, double B, double C, double D, double E, double F) {
-        double determinante = A * E - B * D;
-        double x = (C * E - B * F) / determinante;
-        double y = (A * F - C * D) / determinante;
-        double[] solucion = {x, y};
-        return solucion;
-    }
-
-    public static double[] calcularEcuacionRecta(double x1, double y1, double x2, double y2) {
-        double m = (y2 - y1) / (x2 - x1);
-        double b = y1 - m * x1;
-        double[] ecuacionRecta = {m, b};
-        return ecuacionRecta;
-    }
-}
-
-
-
-
+public class Main {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -116,33 +13,57 @@ package org.example;
             try {
                 switch (opcion) {
                     case 1:
-                        realizarOperacion("Suma", (a, b) -> a + b, scanner);
+                        calcularSolucionEcuaciones(scanner);
                         break;
                     case 2:
-                        realizarOperacion("Resta", (a, b) -> a - b, scanner);
+                        calcularEcuacionDeRecta(scanner);
                         break;
                     case 3:
-                        realizarOperacion("Multiplicación", (a, b) -> a * b, scanner);
+                        realizarOperacion("Suma", (a, b) -> a + b, scanner);
                         break;
                     case 4:
-                        realizarOperacion("División", (a, b) -> a / b, scanner);
+                        realizarOperacion("Resta", (a, b) -> a - b, scanner);
                         break;
                     case 5:
-                        encontrarMayor(scanner);
+                        realizarOperacion("Multiplicación", (a, b) -> a * b, scanner);
                         break;
                     case 6:
-                        encontrarMenor(scanner);
+                        realizarOperacion("División", (a, b) -> a / b, scanner);
                         break;
                     case 7:
-                        calcularPotencia(scanner);
+                        encontrarMayor(scanner);
                         break;
                     case 8:
-                        calcularPorcentaje(scanner);
+                        encontrarMenor(scanner);
                         break;
                     case 9:
-                        resolverEcuacionCuadratica(scanner);
+                        calcularPotencia(scanner);
                         break;
                     case 10:
+                        calcularPorcentaje(scanner);
+                        break;
+                    case 11:
+                        resolverEcuacionCuadratica(scanner);
+                        break;
+                    case 12:
+                        calcularCuadrado(scanner);
+                        break;
+                    case 13:
+                        calcularRectangulo(scanner);
+                        break;
+                    case 14:
+                        calcularCirculo(scanner);
+                        break;
+                    case 15:
+                        calcularEsfera(scanner);
+                        break;
+                    case 16:
+                        calcularCubo(scanner);
+                        break;
+                    case 17:
+                        calcularCono(scanner);
+                        break;
+                    case 18:
                         System.out.println("¡Hasta luego!");
                         scanner.close();
                         System.exit(0);
@@ -155,13 +76,15 @@ package org.example;
                 scanner.nextLine(); // Limpiar el búfer del teclado
             } catch (ArithmeticException e) {
                 System.out.println("Error: No se puede dividir por cero.");
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
             } catch (Exception e) {
                 System.out.println("Error inesperado: " + e.getMessage());
             }
         }
     }
 
-    private static void mostrarMenu() {
+    public static void mostrarMenu() {
         System.out.println("Calculadora");
         System.out.println("1. Suma");
         System.out.println("2. Resta");
@@ -176,7 +99,7 @@ package org.example;
         System.out.print("Seleccione una opción: ");
     }
 
-    private static void realizarOperacion(String nombreOperacion, Operacion operacion, Scanner scanner) {
+    public static void realizarOperacion(String nombreOperacion, Operacion operacion, Scanner scanner) {
         System.out.print("Ingrese el primer número: ");
         double num1 = scanner.nextDouble();
         System.out.print("Ingrese el segundo número: ");
@@ -186,7 +109,7 @@ package org.example;
         System.out.println("Resultado de " + nombreOperacion + ": " + resultado);
     }
 
-    private static void encontrarMayor(Scanner scanner) {
+    public static void encontrarMayor(Scanner scanner) {
         System.out.print("Ingrese el primer número: ");
         double num1 = scanner.nextDouble();
         System.out.print("Ingrese el segundo número: ");
@@ -196,7 +119,7 @@ package org.example;
         System.out.println("El número mayor es: " + mayor);
     }
 
-    private static void encontrarMenor(Scanner scanner) {
+    public static void encontrarMenor(Scanner scanner) {
         System.out.print("Ingrese el primer número: ");
         double num1 = scanner.nextDouble();
         System.out.print("Ingrese el segundo número: ");
@@ -206,7 +129,7 @@ package org.example;
         System.out.println("El número menor es: " + menor);
     }
 
-    private static void calcularPotencia(Scanner scanner) {
+    public static void calcularPotencia(Scanner scanner) {
         System.out.print("Ingrese la base: ");
         double base = scanner.nextDouble();
         System.out.print("Ingrese el exponente: ");
@@ -216,7 +139,7 @@ package org.example;
         System.out.println(base + " elevado a la " + exponente + " es igual a " + resultado);
     }
 
-    private static void calcularPorcentaje(Scanner scanner) {
+    public static void calcularPorcentaje(Scanner scanner) {
         System.out.print("Ingrese el número: ");
         double numero = scanner.nextDouble();
         System.out.print("Ingrese el porcentaje a calcular (0-100): ");
@@ -226,7 +149,7 @@ package org.example;
         System.out.println(porcentaje + "% de " + numero + " es igual a " + resultado);
     }
 
-    private static void resolverEcuacionCuadratica(Scanner scanner) {
+    public static void resolverEcuacionCuadratica(Scanner scanner) {
         System.out.print("Ingrese el coeficiente A: ");
         double a = scanner.nextDouble();
         System.out.print("Ingrese el coeficiente B: ");
@@ -250,5 +173,195 @@ package org.example;
 
     interface Operacion {
         double aplicar(double a, double b);
+    }
+
+    public static double[] calcularSolucion(double A, double B, double C, double D, double E, double F) {
+        double determinante = A * E - B * D;
+        double x = (C * E - B * F) / determinante;
+        double y = (A * F - C * D) / determinante;
+        double[] solucion = { x, y };
+        return solucion;
+    }
+
+    public static double[] calcularEcuacionRecta(double x1, double y1, double x2, double y2) {
+        double m = (y2 - y1) / (x2 - x1);
+        double b = y1 - m * x1;
+        double[] ecuacionRecta = { m, b };
+        return ecuacionRecta;
+    }
+
+    public static void mostrarResultadoSolucion(double[] resultado) {
+        System.out.println("El resultado del sistema de ecuaciones es:");
+        System.out.println("x = " + resultado[0]);
+        System.out.println("y = " + resultado[1]);
+    }
+
+    public static void mostrarResultadoRecta(double[] ecuacionRecta) {
+        System.out.println("La ecuación de la recta es:");
+        System.out.println("Y = " + ecuacionRecta[0] + "X + " + ecuacionRecta[1]);
+    }
+
+    public static void calcularCuadrado(Scanner scanner) {
+        double lado;
+        do {
+            try {
+                System.out.print("Ingrese el lado del cuadrado: ");
+                lado = scanner.nextDouble();
+                if (lado <= 0) {
+                    throw new IllegalArgumentException("El lado debe ser mayor que cero.");
+                }
+                double perimetro = 4 * lado;
+                System.out.println("El perímetro del cuadrado es: " + perimetro);
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Debe ingresar un valor numérico.");
+                scanner.nextLine();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (true);
+    }
+
+    public static void calcularRectangulo(Scanner scanner) {
+        double longitud;
+        double anchura;
+        do {
+            try {
+                System.out.print("Ingrese la longitud del rectángulo: ");
+                longitud = scanner.nextDouble();
+                System.out.print("Ingrese la anchura del rectángulo: ");
+                anchura = scanner.nextDouble();
+                if (longitud <= 0 || anchura <= 0) {
+                    throw new IllegalArgumentException("Tanto la longitud como la anchura deben ser mayores que cero.");
+                }
+                double area = longitud * anchura;
+                System.out.println("El área del rectángulo es: " + area);
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Debe ingresar valores numéricos.");
+                scanner.nextLine();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (true);
+    }
+
+    public static void calcularCirculo(Scanner scanner) {
+        double radio;
+        do {
+            try {
+                System.out.print("Ingrese el radio del círculo: ");
+                radio = scanner.nextDouble();
+                if (radio <= 0) {
+                    throw new IllegalArgumentException("El radio debe ser mayor que cero.");
+                }
+                double area = Math.PI * Math.pow(radio, 2);
+                System.out.println("El área del círculo es: " + area);
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Debe ingresar un valor numérico.");
+                scanner.nextLine();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (true);
+    }
+
+    public static void calcularEsfera(Scanner scanner) {
+        double radio;
+        do {
+            try {
+                System.out.print("Ingrese el radio de la esfera: ");
+                radio = scanner.nextDouble();
+                if (radio <= 0) {
+                    throw new IllegalArgumentException("El radio debe ser mayor que cero.");
+                }
+                double volumen = (4.0 / 3.0) * Math.PI * Math.pow(radio, 3);
+                System.out.println("El volumen de la esfera es: " + volumen);
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Debe ingresar un valor numérico.");
+                scanner.nextLine();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (true);
+    }
+
+    public static void calcularCubo(Scanner scanner) {
+        double lado;
+        do {
+            try {
+                System.out.print("Ingrese la longitud de un lado del cubo: ");
+                lado = scanner.nextDouble();
+                if (lado <= 0) {
+                    throw new IllegalArgumentException("El lado debe ser mayor que cero.");
+                }
+                double volumen = Math.pow(lado, 3);
+                System.out.println("El volumen del cubo es: " + volumen);
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Debe ingresar un valor numérico.");
+                scanner.nextLine();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (true);
+    }
+
+    public static void calcularCono(Scanner scanner) {
+        double radio;
+        double altura;
+        do {
+            try {
+                System.out.print("Ingrese el radio de la base del cono: ");
+                radio = scanner.nextDouble();
+                System.out.print("Ingrese la altura del cono: ");
+                altura = scanner.nextDouble();
+                if (radio <= 0 || altura <= 0) {
+                    throw new IllegalArgumentException("El radio y la altura deben ser positivas.");
+                }
+                double volumen = (1.0 / 3.0) * Math.PI * Math.pow(radio, 2) * altura;
+                System.out.println("El volumen del cono es: " + volumen);
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Debe ingresar valores numéricos.");
+                scanner.nextLine();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (true);
+    }
+
+    public static void calcularSolucionEcuaciones(Scanner scanner) {
+        System.out.print("Ingrese el valor de A: ");
+        double A = scanner.nextDouble();
+        System.out.print("Ingrese el valor de B: ");
+        double B = scanner.nextDouble();
+        System.out.print("Ingrese el valor de C: ");
+        double C = scanner.nextDouble();
+        System.out.print("Ingrese el valor de D: ");
+        double D = scanner.nextDouble();
+        System.out.print("Ingrese el valor de E: ");
+        double E = scanner.nextDouble();
+        System.out.print("Ingrese el valor de F: ");
+        double F = scanner.nextDouble();
+
+        double[] solucion = calcularSolucion(A, B, C, D, E, F);
+        mostrarResultadoSolucion(solucion);
+    }
+
+    public static void calcularEcuacionDeRecta(Scanner scanner) {
+        System.out.print("Ingrese el valor de x1: ");
+        double x1 = scanner.nextDouble();
+        System.out.print("Ingrese el valor de y1: ");
+        double y1 = scanner.nextDouble();
+        System.out.print("Ingrese el valor de x2: ");
+        double x2 = scanner.nextDouble();
+        System.out.print("Ingrese el valor de y2: ");
+        double y2 = scanner.nextDouble();
+
+        double[] ecuacionRecta = calcularEcuacionRecta(x1, y1, x2, y2);
+        mostrarResultadoRecta(ecuacionRecta);
     }
 }
