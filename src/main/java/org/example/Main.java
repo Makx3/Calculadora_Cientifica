@@ -9,7 +9,6 @@ public class Main {
 
     public static void ejecutarMenu(){
         Scanner scanner = new Scanner(System.in);
-
         while (true) {
             mostrarMenu();
             int opcion = scanner.nextInt();
