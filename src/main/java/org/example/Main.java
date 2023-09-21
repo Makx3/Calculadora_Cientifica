@@ -1,40 +1,4 @@
 package org.example;
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
-// a
-import java.util.InputMismatchException;
-import java.util.Scanner;
-public static void Main() {
-    Scanner scanner = new Scanner(System.in);
-        int opcion;
-
-        do {
-            System.out.println("Seleccione una opción:");
-            System.out.println("1. Calcular la solución de un sistema de ecuaciones");
-            System.out.println("2. Calcular la ecuación de una recta");
-            System.out.println("3. Salir");
-            System.out.print("Opción: ");
-
-            opcion = obtenerOpcionValidaMenu();
-
-            switch (opcion) {
-                case 1:
-                    double[] solucionSistema = calcularSolucionEcuaciones();
-                    mostrarResultadoSolucion(solucionSistema);
-                    break;
-                case 2:
-                    double[] ecuacionRecta = calcularEcuacionDeRecta();
-                    mostrarResultadoRecta(ecuacionRecta);
-                    break;
-                case 3:
-                    System.out.println("¡Hasta luego!");
-                    break;
-                default:
-                    System.out.println("Opción no válida, intente de nuevo.");
-            }
-        } while (opcion != 3);
-    }
 
     public static int obtenerOpcionValidaMenu() {
         Scanner scanner = new Scanner(System.in);
