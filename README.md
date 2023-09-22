@@ -1,5 +1,10 @@
 # Calculadora_Cientifica
 
+Distribución del trabajo:
+
+Pasos 1 y 2: Diego Beñaldo
+Paso 3 y pruebas unitarias: Alex Sáez
+Pasos 4 y 5: Maximiliano Sepúlveda
 Se incluyen los metodos para realizar el punto 4 y 5 pedido en el problema
 
 Paso 1:
